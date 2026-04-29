@@ -1,0 +1,53 @@
+/* Card contenedor */
+.card {
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+/* Hover general */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Imagen */
+.card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+/* Zoom de imagen */
+.card:hover img {
+  transform: scale(1.1);
+}
+
+/* Info */
+.card h3 {
+  font-size: 16px;
+  margin: 10px;
+}
+
+.card p {
+  font-size: 13px;
+  margin: 0 10px 10px;
+  color: #bbb;
+}
+
+/* Overlay oscuro al hover */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: 0.3s;
+}
+
+.card:hover::after {
+  background: rgba(0, 0, 0, 0.2);
+}

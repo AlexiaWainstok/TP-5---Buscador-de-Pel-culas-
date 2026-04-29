@@ -1,0 +1,60 @@
+/* Contenedor del formulario */
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+/* Input */
+form input {
+  width: 300px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background-color: #222;
+  color: white;
+  transition: 0.3s;
+}
+
+/* Efecto al escribir */
+form input:focus {
+  background-color: #333;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* Botón */
+form button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #f5c518; /* amarillo IMDb */
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover botón */
+form button:hover {
+  background-color: #ffd700;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  form {
+    flex-direction: column;
+  }
+
+  form input {
+    width: 90%;
+  }
+
+  form button {
+    width: 50%;
+  }
+}
