@@ -59,3 +59,31 @@
     font-size: 22px;
   }
 }
+/* --- BOTÓN VOLVER --- */
+.btn-back {
+  align-self: flex-start; /* 👈 lo manda a la izquierda */
+  background: #ff4da6;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-family: 'Courier New', monospace;
+  transition: 0.2s;
+}
+
+.btn-back:hover {
+  background: #ff2f92;
+  transform: translateY(-2px);
+}
+.btn-back {
+  align-self: flex-start;
+  background: #ff4da6;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}

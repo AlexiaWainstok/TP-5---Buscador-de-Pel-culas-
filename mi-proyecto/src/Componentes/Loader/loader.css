@@ -1,0 +1,57 @@
+/* Contenedor del Loader */
+.loader {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-shadow: 0 0 8px var(--accent);
+}
+
+/* Efecto de puntos suspensivos o cursor parpadeante */
+.loader::after {
+  content: '_';
+  animation: cursor-blink 0.8s infinite steps(2);
+}
+
+/* Animación de parpadeo */
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Opcional: Agregar una barra de escaneo horizontal detrás del texto */
+.loader-container {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(0, 255, 65, 0.05);
+  margin: 20px 0;
+}
+
+.loader-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+  animation: scanning 2s linear infinite;
+  z-index: 1;
+}
+
+@keyframes scanning {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
