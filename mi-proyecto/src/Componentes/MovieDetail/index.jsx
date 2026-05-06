@@ -1,13 +1,19 @@
+//componente que muestra el detalle completo de una película
+//recibe una película por props
 const MovieDetail = ({ movie }) => {
   return (
     <div className="detail">
+      
+   
       <h2>{movie.Title}</h2>
 
+   
       <img
         src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.png"}
         alt={movie.Title}
       />
 
+      {/* muestra información (si no hay, muestra "No disponible") */}
       <p><strong>Año:</strong> {movie.Year}</p>
       <p><strong>Género:</strong> {movie.Genre || "No disponible"}</p>
       <p><strong>Director:</strong> {movie.Director || "No disponible"}</p>
