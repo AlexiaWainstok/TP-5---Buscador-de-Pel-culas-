@@ -1,18 +1,27 @@
 import MovieCard from "../MovieCard";
 
-//componente que muestra la lista de películas
-//recibe un array de películas y una función para seleccionar
-const MovieList = ({ movies, onSelect }) => {
+//componente que muestra todas las películas
+const MovieList = ({ peliculas, onSelect }) => {
+
   return (
     <div className="grid">
-      
-      {/* recorre las películas y crea una tarjeta por cada una */}
-      {movies.map((movie) => (
+
+      {/* recorre el array de películas */}
+      {/* por cada película crea una tarjeta */}
+      {peliculas.map((movie) => (
+
         <MovieCard
-          key={movie.imdbID} //clave única
-          movie={movie} //datos de la película
-          onSelect={onSelect} //función para click
+
+          //clave única para identificar cada película
+          key={movie.imdbID}
+
+          //manda los datos de la película
+          movie={movie}
+
+          //manda la función para ver el detalle
+          onSelect={onSelect}
         />
+
       ))}
 
     </div>

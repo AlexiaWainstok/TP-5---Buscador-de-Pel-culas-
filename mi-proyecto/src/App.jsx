@@ -1,27 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { OMDBSearchByPage, OMDBGetByImdbID } from "./services/omb-wrapper"; 
 //importo OMD, que me va a llamar a la API,
-// me va a devolver los datos de las películas,
-// la lista como el detalle de cada película
+// me va a devolver la lista de la pelicula buscada con sus detalles 
+//Importo los componentes que voy a usar en la app
 import SearchBar from "./Componentes/SearchBar";
 import MovieList from "./Componentes/MovieList";
 import MovieDetail from "./Componentes/MovieDetail";
+import Loader from "./Componentes/Loader";
+import ErrorMensaje from "./Componentes/ErrorMensaje";
 import "./App.css";
 
 function App() {
-  //CREAO UNA VARIABLE DE ESTADO PARA DESPUES GUARDAR LAS PELICULAS 
-  //EMPIEZA VACIA YA QUE NO TIENE NINGUNA PELICULA 
+
+  //guarda la lista de películas
+  //empieza vacío porque todavía no hay películas
   const [movies, setMovies] = useState([]);
-  //LO MISMO PERO PARA LA PELICULA SELLECIONADA 
-  //EMPIEZA EN NULL YA QUE NO HAY NINGUNA PELICULA SELECCIONADA
+   //guarda la película seleccionada
+  //empieza en null porque no hay ninguna seleccionada
   const [selectedMovie, setSelectedMovie] = useState(null);
-
-  // ESTADOS ADICIONALES PARA CONTROLAR LA INTERFAZ
+  //guarda si la app está cargando datos
+  //empieza en false porque al inicio no está cargando nada
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  //guarda mensajes de error
+  //empieza vacío porque no hay errores
+  const [error, setError] = useState("");
 
-  //Buscar películas
-  //funcion q va a traer el listado de peliculas
+  useEffect(() => {
+  searchMovies("Cars");
+  }, []);
+
+  //Buscar películas(va a traer el listado de peliculas)
   const searchMovies = async (query) => {
     try {
       // Indicamos que el sistema está trabajando
@@ -36,17 +44,17 @@ function App() {
       const result = await OMDBSearchByPage(query);
       
       //si no se encuentra la lista de películas, pueden suceder dos cosas: 
-      //limpia la lista 
-      //actualiza la lista con los resultados encontrados,mostrando MovieList
+      //lista vacia y muestra el error o actualiza la lista con los resultados 
       if (!result.respuesta) {
         setMovies([]);
         setError("No se encontraron resultados para la búsqueda.");
       } else {
+        //guarda las peliculas que encontro en el estado de movies, para mostrar la lista
         setMovies(result.datos);
       }
 
     } catch (error) {
-      // Capturamos fallos de red o de código
+      // si falla la conexion o hay algun error
       setError("SYSTEM_FAILURE: Error de conexión con el servidor.");
     } finally {
       // Se apaga el indicador de carga siempre
@@ -54,19 +62,17 @@ function App() {
     }
   };
 
-  //Obtener detalle de película
-  //cuando el usuario selecciona una película del listado, 
-  // se llama a esta función, pasando el ID de la película seleccionada
+  //Obtener detalle de película(trae el detalle de la película seleccionada)
   const getMovieDetail = async (id) => {
     try {
       setLoading(true);
       setError(null);
 
-      //llama a la función de detalle de la API, pasando el ID de la película, y espera la respuesta
+      //busca el detalle de la pelicula por su ID
       const result = await OMDBGetByImdbID(id);
 
-      //si encuentra la película, actualiza el estado de selectedMovie, 
-      // mostrando los detalles de la pelicula
+      //si encuentra la película, actualiza el estado de selectedMovie y muestra los detalles
+      // sino muestra un mensaje de error
       if (result.respuesta) {
         setSelectedMovie(result.datos);
       } else {
@@ -82,29 +88,36 @@ function App() {
 
   //en pantalla se muestra el título, el buscador y según si hay una película, el detalle o la lista
   //Acá uso props para pasar datos y funciones a los componentes
-  return (
+return (
     <div className="app">
-      <header id="center">
-        <h1>Buscador de Películas</h1>
-        <SearchBar onSearch={searchMovies} />
-      </header>
 
-      <main>
-        {/* Mostramos el loader si el sistema está buscando */}
-        {loading && <div className="loader">PROCESANDO_DATOS...</div>}
+      {/* buscador */}
+      <SearchBar onSearch={searchMovies} />
 
-        {/* Mostramos el error si el estado 'error' tiene texto */}
-        {error && <div className="error-message">⚠️ {error}</div>}
+      {/* muestra el loader si está cargando */}
+      {loading && <Loader />}
 
-        {/* Lógica de visualización que ya tenías */}
-        {!loading && (
-          selectedMovie ? (
-            <MovieDetail movie={selectedMovie} />
-          ) : (
-            <MovieList movies={movies} onSelect={getMovieDetail} />
-          )
-        )}
-      </main>
+      {/* muestra error si existe */}
+      {error && <ErrorMensaje mensaje={error} />}
+
+      {/* si no hay resultados */}
+      {!loading && !error && movies.length === 0 && (
+        <p>No se encontraron resultados</p>
+      )}
+
+      {!loading && !error && (
+        selectedMovie && (
+           <MovieDetail
+            movie={selectedMovie}
+            onBack={() => setSelectedMovie(null)}/>
+         )
+       )}
+
+      {!loading && !error && !selectedMovie && (
+       <MovieList
+        peliculas={movies}
+        onSelect={getMovieDetail} />
+      )}
     </div>
   );
 }

@@ -1,35 +1,49 @@
 import { useState } from "react";
 
-//componente buscador
-//recibe la función para hacer la búsqueda
+//componente del buscador
+//recibe la función para buscar películas
 const SearchBar = ({ onSearch }) => {
 
-  //estado para guardar lo que escribe el usuario
+  //guarda lo que escribe el usuario
   const [input, setInput] = useState("");
 
-  //se ejecuta cuando se envía el formulario
+  //esta función se ejecuta cuando toca buscar
   const handleSubmit = (e) => {
-    e.preventDefault(); //evita que recargue la página
 
-    //si el input no está vacío, llama a la función de búsqueda
+    //evita que la página se recargue
+    e.preventDefault();
+
+    //si el input no está vacío
     if (input.trim() !== "") {
+
+      //manda el texto al componente App
       onSearch(input);
     }
   };
 
   return (
+
+    //cuando se envía el formulario ejecuta handleSubmit
     <form onSubmit={handleSubmit}>
-      
-      {/* input donde el usuario escribe */}
+
+      {/* input donde escribe el usuario */}
       <input
         type="text"
+
+        //texto que aparece dentro del input
         placeholder="Buscar películas o series..."
+
+        //muestra el valor guardado en input
         value={input}
-        onChange={(e) => setInput(e.target.value)} //actualiza el estado
+
+        //actualiza el estado mientras escribe
+        onChange={(e) => setInput(e.target.value)}
       />
 
       {/* botón para buscar */}
-      <button type="submit">Buscar</button>
+      <button type="submit">
+        Buscar
+      </button>
 
     </form>
   );

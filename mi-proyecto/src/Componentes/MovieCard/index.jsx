@@ -1,24 +1,32 @@
 //componente que muestra una película en forma de tarjeta
-//recibe la película y una función para cuando se hace click
-      {/* 👇 BOTÓN ACÁ */}
-      <button className="btn-back" onClick={() => window.history.back()}>
-        ← Volver
-      </button>
+//recibe los datos de la película y la función para ver el detalle
 const MovieCard = ({ movie, onSelect }) => {
+
   return (
-    //al hacer click, llama a la función y pasa el id de la película
-    <div className="card" onClick={() => onSelect(movie.imdbID)}>
-      
-      {/* muestra la imagen o una por defecto si no hay */}
+    <div className="card">
+
+      {/* imagen de la película */}
+      {/* si no tiene imagen usa una por defecto */}
       <img
         src={movie.Poster !== "N/A" ? movie.Poster : "/no-image.png"}
         alt={movie.Title}
       />
 
-      {/* muestra datos básicos */}
+      {/* datos básicos */}
       <h3>{movie.Title}</h3>
+
       <p>{movie.Year}</p>
+
       <p>{movie.Type}</p>
+
+      {/* botón para ver el detalle */}
+      <button onClick={() => onSelect(movie.imdbID)}>
+
+        {/* manda el id de la película */}
+        Ver detalle
+
+      </button>
+
     </div>
   );
 };
