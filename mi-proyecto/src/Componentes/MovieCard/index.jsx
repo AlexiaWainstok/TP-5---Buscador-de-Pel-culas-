@@ -20,10 +20,11 @@ const MovieCard = ({ movie, onSelect }) => {
       <p>{movie.Type}</p>
 
       {/* botón para ver el detalle */}
-      <button onClick={() => onSelect(movie.imdbID)}>
+      <button onClick={() => onSelect(movie.imdbID)}className="main-button">
 
         {/* manda el id de la película */}
         Ver detalle
+        
 
       </button>
 

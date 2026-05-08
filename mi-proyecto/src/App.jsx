@@ -98,7 +98,8 @@ return (
       {loading && <Loader />}
 
       {/* muestra error si existe */}
-      {error && <ErrorMensaje mensaje={error} />}
+      {error && <ErrorMensaje mensaje={error} onClose={() => {setError("");searchMovies("Cars");
+  }} />}
 
       {/* si no hay resultados */}
       {!loading && !error && movies.length === 0 && (

@@ -6,7 +6,7 @@ const MovieDetail = ({ movie, onBack }) => {
     <div className="detail">
 
       {/* botón para volver a la lista */}
-      <button className="btn-back" onClick={onBack}>
+      <button className="main-button" onClick={onBack}>
         ← Volver
       </button>
 

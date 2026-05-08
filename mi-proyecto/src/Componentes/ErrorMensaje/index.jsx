@@ -1,9 +1,9 @@
 //componente que muestra errores
 //recibe el mensaje y la función para cerrar
-export default function ErrorMessage({ message, onClose }) {
+export default function ErrorMessage({ mensaje, onClose }) {
 
   //si no hay mensaje no muestra nada
-  if (!message) return null;
+  if (!mensaje) return null;
 
   return (
 
@@ -13,16 +13,10 @@ export default function ErrorMessage({ message, onClose }) {
       {/* parte superior del error */}
       <div className="error-header">
 
-        {/* título */}
-        <span>[!] SYSTEM_FAILURE</span>
-
+    
         {/* botón para cerrar */}
-        <button
-          onClick={onClose}
-          className="error-close"
-        >
-          X
-        </button>
+      <button onClick={onClose} className="main-button"> Volver
+      </button>
 
       </div>
 
@@ -30,7 +24,7 @@ export default function ErrorMessage({ message, onClose }) {
       <div className="error-body">
 
         {/* mensaje del error */}
-        <p>{message}</p>
+        <p>{mensaje}</p>
 
       </div>
 

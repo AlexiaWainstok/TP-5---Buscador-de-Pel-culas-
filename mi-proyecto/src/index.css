@@ -100,3 +100,21 @@ h1 {
   33% { content: " buscando.."; }
   66% { content: " buscando..."; }
 }
+
+.main-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.main-button:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
