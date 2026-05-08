@@ -24,8 +24,6 @@ const MovieCard = ({ movie, onSelect }) => {
 
         {/* manda el id de la película */}
         Ver detalle
-        
-
       </button>
 
     </div>

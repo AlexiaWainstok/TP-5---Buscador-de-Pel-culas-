@@ -11,7 +11,6 @@ import ErrorMensaje from "./Componentes/ErrorMensaje";
 import "./App.css";
 
 function App() {
-
   //guarda la lista de películas
   //empieza vacío porque todavía no hay películas
   const [movies, setMovies] = useState([]);
@@ -23,7 +22,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   //guarda mensajes de error
   //empieza vacío porque no hay errores
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
 
   useEffect(() => {
   searchMovies("Cars");
@@ -52,7 +51,7 @@ function App() {
         //guarda las peliculas que encontro en el estado de movies, para mostrar la lista
         setMovies(result.datos);
       }
-
+      
     } catch (error) {
       // si falla la conexion o hay algun error
       setError("SYSTEM_FAILURE: Error de conexión con el servidor.");
